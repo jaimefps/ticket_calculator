@@ -16,10 +16,17 @@ export default {
     .header {
       width: 100%;
       display: flex;
-      flex-direction: column;
+      justify-content: space-around;
+      background-color: lightgreen;
+      padding: 20px 0;
+    }
+
+    .clear {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
       align-items: center;
-      background-color: pink;
-      padding: 10px 0;
+      background-color: coral;
     }
 
     .mode {
@@ -27,7 +34,7 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-color: coral;
+      background-color: orange;
     }
 
     .form {
@@ -36,12 +43,12 @@ export default {
       flex-direction: column;
       align-items: center;
       padding: 20px 0;
-      background-color: lightgreen;
+      background-color: pink;
       margin: 10px 0;
     }
     
     label {
-      width: 175px;
+      width: 255px;
     }
 
     .dropdown {
@@ -50,8 +57,6 @@ export default {
       margin: 10px 0;
       padding: 4px;
     }
-
-
 
     .submitButton {
       border: 1px solid white;
@@ -69,6 +74,7 @@ export default {
       color: white;
       background-color: grey;
       border: 1px solid grey;
+      box-shadow: 3px 3px 4px white;
     }
 
     .error {
@@ -81,7 +87,7 @@ export default {
 
     .result {
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
       background-color: lightblue;
       width: 100%;
       padding: 10px 0;
