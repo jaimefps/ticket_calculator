@@ -17,7 +17,7 @@ export default {
       width: 100%;
       display: flex;
       justify-content: space-around;
-      background-color: lightgreen;
+      background-color: #9ACD32;
       padding: 20px 0;
     }
 
@@ -27,6 +27,11 @@ export default {
       justify-content: space-around;
       align-items: center;
       background-color: coral;
+    }
+
+    .formContainer {
+      margin: 10px 0;
+      width: 100%;
     }
 
     .mode {
@@ -44,7 +49,6 @@ export default {
       align-items: center;
       padding: 20px 0;
       background-color: pink;
-      margin: 10px 0;
     }
     
     label {
@@ -61,7 +65,6 @@ export default {
     .submitButton {
       border: 1px solid white;
       box-shadow: 2px 2px 1px grey;
-      outline: none;
       cursor: pointer;
       padding: 5px 20px;
       width: 100px;

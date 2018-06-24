@@ -46,7 +46,7 @@ const DEFAULT_STATE = {
 
 const SAFE_MODE = 'safe';
 const YOLO_MODE = 'yolo';
-
+const BASIC_OPTIONS = [["", "Pick"], 0, 1, 2, 3, 4, 5, 6, 7];
 
 class App extends Component {
   constructor(props) {
@@ -184,7 +184,7 @@ class App extends Component {
 
   render() {
     const { result, form, error, mode, isBug } = this.state;
-    const basicOpts = [["", "Pick"], 0, 1, 2, 3, 4, 5, 6, 7];
+    
 
     const fields = [{
       name: 'mixed_calls',
@@ -221,31 +221,34 @@ class App extends Component {
           <button className="submitButton" onClick={this.clear}>Clear</button>
         </div>
 
-        <div className='mode'>
-          <Dropdown
-            name='mode'
-            label='Mode'
-            value={mode}
-            options={[["", "Pick"], SAFE_MODE, YOLO_MODE]}
-            onChange={(e) => this.setState({ mode: e.target.value })}
-          />
-        </div>
-
-        <div className="form">
-
-          {fields.map((x, idx) => (
+        <div className="formContainer">
+          <div className='mode'>
             <Dropdown
-              key={idx}
-              name={x.name}
-              label={x.label}
-              value={form[x.name]}
-              options={basicOpts}
-              onChange={this.handleChange}
+              name='mode'
+              label='Mode'
+              value={mode}
+              options={[["", "Pick"], SAFE_MODE, YOLO_MODE]}
+              onChange={(e) => this.setState({ mode: e.target.value })}
             />
-          ))}
+          </div>
 
-          <button className="submitButton" onClick={this.submit}>Submit</button>
+          <div className="form">
+
+            {fields.map((x, idx) => (
+              <Dropdown
+                key={idx}
+                name={x.name}
+                label={x.label}
+                value={form[x.name]}
+                options={BASIC_OPTIONS}
+                onChange={this.handleChange}
+              />
+            ))}
+
+            <button className="submitButton" onClick={this.submit}>Submit</button>
+          </div>
         </div>
+
         { error &&
           <div className="error">
             Error: All fields required!
