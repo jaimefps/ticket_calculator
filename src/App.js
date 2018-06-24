@@ -6,14 +6,12 @@ const Dropdown = ({ label, value, options, name, onChange }) => (
   <div className="dropdown">
     <label> {label} </label>
     <select value={value} name={name} onChange={onChange}>
-      {
-        options.map((opt, idx) => {
-          if (Array.isArray(opt)) {
-            return <option key={idx} value={opt[0]}>{opt[1]}</option>
-          }
-          return <option key={idx} value={opt}>{opt}</option>
-        })
-      }
+      {options.map((opt, idx) => {
+        if (Array.isArray(opt)) {
+          return <option key={idx} value={opt[0]}>{opt[1]}</option>
+        }
+        return <option key={idx} value={opt}>{opt}</option>
+      })}
     </select>
   </div>
 );
@@ -86,6 +84,22 @@ class App extends Component {
     return this.getEmoji(name);
   }
 
+  clear() {
+    this.setState({
+      mode: "",
+      form: {
+        mixed_calls: "",
+        new_calls: "",
+        new_components: "",
+        new_validations: "",
+        ui_complexity: "",
+      },
+      isBug: false,
+      error: false,
+      result: null,
+    });
+  }
+
   submit(e) {
     const incomplete = this.checkIncomplete();
 
@@ -99,6 +113,11 @@ class App extends Component {
         result: this.aproximate(),
       });
     }
+  }
+
+  checkIncomplete() {
+    const { form, mode } = this.state;
+    return Object.values(form).includes("") || mode === "";
   }
 
   aproximate() {
@@ -130,26 +149,12 @@ class App extends Component {
     return result ? result : total;
   }
 
-  clear() {
-    this.setState({
-      mode: "",
-      form: {
-        mixed_calls: "",
-        new_calls: "",
-        new_components: "",
-        new_validations: "",
-        ui_complexity: "",
-      },
-      isBug: false,
-      error: false,
-      result: null,
-    });
-  }
-
   handleChange(e) {
     const { name, value } = e.target;
     const { form } = this.state;
+    
     form[name] = value;
+
     this.setState({
       form,
     });
@@ -177,15 +182,9 @@ class App extends Component {
     }
   }
 
-  checkIncomplete() {
-    const { form, mode } = this.state;
-    return Object.values(form).includes("") || mode === "";
-  }
-
   render() {
     const { result, form, error, mode, isBug } = this.state;
     
-
     const fields = [{
       name: 'mixed_calls',
       label: 'Simultaneous API Calls',
@@ -222,6 +221,7 @@ class App extends Component {
         </div>
 
         <div className="formContainer">
+
           <div className='mode'>
             <Dropdown
               name='mode'
@@ -233,7 +233,6 @@ class App extends Component {
           </div>
 
           <div className="form">
-
             {fields.map((x, idx) => (
               <Dropdown
                 key={idx}
@@ -244,9 +243,9 @@ class App extends Component {
                 onChange={this.handleChange}
               />
             ))}
-
             <button className="submitButton" onClick={this.submit}>Submit</button>
           </div>
+
         </div>
 
         { error &&
@@ -254,13 +253,15 @@ class App extends Component {
             Error: All fields required!
           </div>
         }
-        {result !== null &&
+
+        { result !== null &&
           <h1 className="result">
             <div>{this.getResultEmoji()}</div> 
             <div>{result}</div> 
             <div>{this.getResultEmoji()}</div>
           </h1>
         }
+        
       </div>
     );
   }
